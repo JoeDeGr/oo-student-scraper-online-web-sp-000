@@ -9,7 +9,8 @@ class Scraper
     students = doc.css("div.student-card")
 
     students.each do |student|
-      name =  student.css("h4.student-name").text.strip
+      name =  student.css("div.card-text-container > h4").text.strip
+      #ryan-johnson-card > a > div.card-text-container > h4
       location = student.css("p.student-location").text.strip
       profile_url =student.css("a").attribute("href").value
       student_list<<{:name => name, :location => location, :profile_url => profile_url}
@@ -37,5 +38,6 @@ class Scraper
       student[:profile_quote] = doc.css("div.vitals-text-container > div").inner_text.strip
       student[:bio] = doc.css("div.description-holder > p").inner_text
       student
+      binding.pry
   end
 end
